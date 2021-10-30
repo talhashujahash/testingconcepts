@@ -1,0 +1,10 @@
+.modal {
+  position: absolute;
+  z-index: 1;
+}
+
+.modal_content {
+  background-color: white;
+  width: 40%;
+  padding: 20px;
+}

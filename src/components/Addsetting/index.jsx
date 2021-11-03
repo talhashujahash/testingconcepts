@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Addsetting.css";
 export default class index extends Component {
   render() {
+    console.log(this.props.token)
     return (
       <div className="Addsetting">
         <div className="Addsettinghead">

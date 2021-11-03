@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
+import {token } from '../../Common/Utils'
 
 
 export default class index extends Component {
@@ -12,7 +13,6 @@ export default class index extends Component {
       token:props.token,
       body:props.body,
       shop:props.shop,
-      token:props.token,
       showModalPopup: false,
       accept: false,
     };
@@ -28,7 +28,7 @@ export default class index extends Component {
             { ...this.state.body,shop:this.state.shop },
             {
               headers: {
-                Authorization: "Bearer e8ca54832038db60ede62e44827fc054eabfc2de",
+                Authorization: token,
               },
             }
           )

@@ -25,7 +25,7 @@ export default class index extends Component {
       step: false,
       loading: false,
       data: [],
-      emailAddressError: '',
+
 
     };
   }
@@ -48,7 +48,6 @@ export default class index extends Component {
 
   next = (body) => {
     if (
-      this.validateEmailAddress &&
       this.state.shop_details.shop_email === "" &&
       this.state.shop_details.shop_name === "" &&
       this.state.shop_details.shop_number === "" &&

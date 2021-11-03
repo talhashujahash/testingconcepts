@@ -26,7 +26,7 @@ export default class index extends Component {
             }}
           >
             <li>Dashboard </li>
-            <Link to="/third" style={{ color: "white" }}>
+            <Link to="/setting" style={{ color: "white" }}>
               <li>Setting</li>
             </Link>
             <Link to="/Contactus" style={{ color: "white" }}>

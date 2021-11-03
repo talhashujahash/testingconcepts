@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
-
 import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
-//
+
 
 export default class index extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
+      on:props.on,
+      token:props.token,
+      body:props.body,
+      shop:props.shop,
+      token:props.token,
       showModalPopup: false,
       accept: false,
     };
@@ -17,32 +21,27 @@ export default class index extends Component {
     this.setState({ showModalPopup: status });
   };
   next = () => {
-    axios
-      .post("https://825a-119-73-120-105.ngrok.io/get_token", {
-        domain: "sikander-learning.myshopify.com",
-      })
-      .then((res) => {
-        console.log(res);
+    console.log(this.state.token);
         axios
           .post(
-            "https://825a-119-73-120-105.ngrok.io/shop_details",
-            { ...this.props.body },
+            `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
+            { ...this.state.body,shop:this.state.shop },
             {
               headers: {
-                Authorization: "Token " + res.data.token,
+                Authorization: "Bearer e8ca54832038db60ede62e44827fc054eabfc2de",
               },
             }
           )
           .then(function (response) {
             console.log(response);
           });
-      });
+      
   };
   render() {
     return (
       <div className="Termsmaincontainer">
-        {this.props.on && <img alt="" src={"image 1.png"}></img>}
-        {this.props.on && <p className="color">step 2 OF 3</p>}
+        {this.state.on && <img alt="" src={"image 1.png"}></img>}
+        {this.state.on && <p className="color">step 2 OF 3</p>}
         <div className="Termsmaindiv">
           <p>AGREEMENT</p>
           <h1>Terms and Conditions</h1>
@@ -76,7 +75,7 @@ export default class index extends Component {
               terms Understanding these terms is important because, to use our
               services, you must accept these terms.
             </p>
-            {this.props.on && (
+            {this.state.on && (
               <h5>
                 <input
                   type="checkbox"
@@ -89,7 +88,7 @@ export default class index extends Component {
               </h5>
             )}
           </div>
-          {this.props.on && (
+          {this.state.on && (
             <div>
               {console.log(Boolean(this.props.on))}
               <button className="button1">Not right now</button>

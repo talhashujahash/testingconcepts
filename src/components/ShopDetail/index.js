@@ -2,30 +2,17 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TermsandCons from "../Terms&Cond";
-
+import Third from "../Addsetting";
 import "./ShopDetail.css";
-let data = "";
-axios
-  .post("https://825a-119-73-120-105.ngrok.io/get_token", {
-    domain: "sikander-learning.myshopify.com",
-  })
-  .then((res) => {
-    console.log(res);
-    axios
-      .get(
-        "https://825a-119-73-120-105.ngrok.io/shop_details?shop=sikander-learning.myshopify.com",
-        { headers: { Authorization: "Token " + res.data.token } }
-      )
-      .then((res) => {
-        console.log(res.data);
-        data = res.data.shop_details;
-      });
-  });
+
+const token = "Bearer e8ca54832038db60ede62e44827fc054eabfc2de"
+
 export default class index extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      shop: "sikander-learning.myshopify.com",
+      shop: props.shop,
+
       shop_name: "",
       shop_email: "",
       shop_number: "",
@@ -33,7 +20,22 @@ export default class index extends Component {
       alcoholic_check: false,
       drugs_check: false,
       step: false,
+      data: []
     };
+  }
+
+
+  componentWillMount() {
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${this.state.shop}`,
+        { headers: { Authorization: token } }
+      )
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ data: res.data.shop_details })
+
+      })
   }
 
   next = (body) => {
@@ -52,9 +54,9 @@ export default class index extends Component {
     const { step } = this.state;
     return (
       <div>
-        {data[0]?.shop_name === "" && (
+        {this.state.data[0]?.shop_name == null ? (
           <div>
-            {step && <TermsandCons body={this.state} on={true} />}
+            {step && <TermsandCons body={this.state} on={true} token={token} />}
             {!step && (
               <div className="ShopD_style">
                 <img alt="" src={"image 1.png"} />
@@ -164,7 +166,8 @@ export default class index extends Component {
               </div>
             )}
           </div>
-        )}
+        ) : <Third token={this.state.token} shop={this.state.shop} />}
+
       </div>
     );
   }

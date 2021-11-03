@@ -2,19 +2,19 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Button, Modal } from "@mui/material";
 import { Link } from "react-router-dom";
-import { baseUrl, taken } from "../../Common/Utils";
+//import { baseUrl, taken } from "../../Common/Utils";
 import "./Contactus.css";
 export default class index extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       showModalPopup: false,
-      shop: "sikander-learning.myshopify.com",
+      shop: props.shop,
+      token: props.token,
       email: "",
       name: "",
       description: "",
       phone: "",
-
       preference: "",
       query_type: "Information",
     };
@@ -32,26 +32,21 @@ export default class index extends Component {
       this.state.phone !== ""
     ) {
       console.log(this.state);
+
       axios
-        .post("https://825a-119-73-120-105.ngrok.io/get_token", {
-          domain: "sikander-learning.myshopify.com",
-        })
-        .then((res) => {
-          console.log(res);
-          axios
-            .post(
-              baseUrl + "/contact_details",
-              { ...this.state },
-              {
-                headers: {
-                  Authorization: "Token " + res.data.token,
-                },
-              }
-            )
-            .then(function (response) {
-              console.log(response);
-            });
+        .post(
+          `${process.env.REACT_APP_BACKEND_URL}/contact_details`,
+          { ...this.state },
+          {
+            headers: {
+              Authorization: "Token " + this.state.token,
+            },
+          }
+        )
+        .then(function (response) {
+          console.log(response);
         });
+
     }
   };
   onChangeRadio = (e) => {

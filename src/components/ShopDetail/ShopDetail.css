@@ -35,7 +35,7 @@
   box-shadow: 5px 0px 18px #888888;
 }
 .formstyle :nth-child(n) {
-  margin: 10px;
+  margin: 8px;
 }
 .radiobtn {
   height: 27px;

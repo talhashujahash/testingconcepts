@@ -8,20 +8,18 @@ import { token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
 
 
-const emailValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//const emailValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export default class index extends Component {
   constructor(props) {
     super();
     this.state = {
       shop: props.shop,
-      shop_details: {
-        shop_name: "",
-        shop_email: "",
-        shop_number: "",
-        shop_url: "",
-        alcoholic_check: false,
-        drugs_check: false
-      },
+      shop_name: "",
+      shop_email: "",
+      shop_number: "",
+      shop_url: "",
+      alcoholic_check: false,
+      drugs_check: false,
       step: false,
       loading: false,
       data: [],
@@ -48,14 +46,15 @@ export default class index extends Component {
 
   next = (body) => {
     if (
-      this.state.shop_details.shop_email === "" &&
-      this.state.shop_details.shop_name === "" &&
-      this.state.shop_details.shop_number === "" &&
-      this.state.shop_details.shop_url === ""
+      (this.state.shop_details.shop_email === "" &&
+        this.state.shop_details.shop_name === "" &&
+        this.state.shop_details.shop_number === "" &&
+        this.state.shop_details.shop_url === "")
     ) {
+      this.setState({ step: true })
     } else {
       console.log(body);
-      this.setState({ step: true });
+
     }
   };
   render() {
@@ -105,6 +104,7 @@ export default class index extends Component {
                         required="true"
                         onBlur={this.validateEmailAddress}
                         onChange={(e) => {
+                          console.log([e.target.name])
                           this.setState({ [e.target.name]: e.target.value });
                         }}
                       ></input>
@@ -174,7 +174,6 @@ export default class index extends Component {
 
                   <div className="shopDetailsubmit">
                     <button onClick={() => {
-                      console.log(this.validateEmailAddress)
                       this.next(this.state.shop_details)
                     }}>Next</button>
                   </div>

@@ -82,7 +82,7 @@ export default class index extends Component {
                   ></img>
                 </div>
               </div>
-              <img className="imgAdsetting" src="shoppingcart.png" alt="" />
+              <img className="imgAdsetting" src="CartPage.png" alt="" />
             </div>
           </div>
           <div>
@@ -101,7 +101,7 @@ export default class index extends Component {
                   ></img>
                 </div>
               </div>
-              <img className="imgAdsetting" src="checkout.png" alt="" />
+              <img className="imgAdsetting" src="checkout.jpg" alt="" />
             </div>
           </div>
         </div>

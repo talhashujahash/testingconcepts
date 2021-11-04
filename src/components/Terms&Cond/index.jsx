@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
 import {token } from '../../Common/Utils'
-
+import Third from '../Addsetting'
 
 export default class index extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ export default class index extends Component {
       shop:props.shop,
       showModalPopup: false,
       accept: false,
+      on:false
     };
   }
   isShowPopup = (status) => {
@@ -116,9 +117,15 @@ export default class index extends Component {
             <img alt="" src={"congrat.png"}></img>
             <h3>YOUR REQUEST IS SENT FOR APPROVAL</h3>
             <p>Wait until our CSR reaches you out to provide assistance</p>
-            <Button onClick={() => this.isShowPopup(false)}>DONE</Button>
+            <Button onClick={() => {this.isShowPopup(false)
+                this.setState({on:true})  
+          }
+            }
+            >DONE</Button>
+           
           </div>
         </Modal>
+        {this.state.on && <Third/>}
       </div>
     );
   }

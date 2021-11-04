@@ -11,8 +11,10 @@ import axios from "axios";
 import { token } from './Common/Utils'
 import { Component } from "react";
 import 'antd/dist/antd.css';
+
 const value = queryString.parse(window.location.href);
 const shop = value.shop
+// alert(shop)
 
 
 
@@ -47,22 +49,22 @@ class App extends Component {
           <Switch>
             <Route exact path="/">
               <Head />
-              <First token={token} shop={value.shop} />
+              <First token={token} shop={shop} />
             </Route>
             <Route path="/second">
               <Head />
               <Navbar />
-              <Second token={token} shop={value.shop} on={false} />
+              <Second token={token} shop={shop} on={false} />
             </Route>
             <Route path="/setting">
               <Head />
               <Navbar />
-              <Third token={this.state.token1} shop={value.shop} />
+              <Third token={this.state.token1} shop={shop} />
             </Route>
             <Route path="/contactus">
               <Head />
               <Navbar />
-              <Contactus token={this.state.token1} shop={value.shop} />
+              <Contactus token={this.state.token1} shop={shop} />
             </Route>
           </Switch>
         </Router>

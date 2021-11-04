@@ -3,7 +3,11 @@ import axios from "axios";
 import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
 import {token } from '../../Common/Utils'
+<<<<<<< HEAD
 import Third from '../Addsetting'
+=======
+import Third from '../Addsetting/index'
+>>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
 
 export default class index extends Component {
   constructor(props) {
@@ -12,7 +16,7 @@ export default class index extends Component {
       on:props.on,
       token:props.token,
       body:props.body,
-      shop:props.shop,
+      onn:false,
       showModalPopup: false,
       accept: false,
       on:false
@@ -22,11 +26,11 @@ export default class index extends Component {
     this.setState({ showModalPopup: status });
   };
   next = () => {
-    console.log(this.state.token);
+    console.log(this.state.shop);
         axios
           .post(
             `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
-            { ...this.state.body,shop:this.state.shop },
+            { ...this.state.body },
             {
               headers: {
                 Authorization: token,
@@ -34,13 +38,18 @@ export default class index extends Component {
             }
           )
           .then(function (response) {
+            
             console.log(response);
+
           });
       
   };
   render() {
     return (
+      <div>
+        {(!this.state.onn)&&
       <div className="Termsmaincontainer">
+        
         {this.state.on && <img alt="" src={"image 1.png"}></img>}
         {this.state.on && <p className="color">step 2 OF 3</p>}
         <div className="Termsmaindiv">
@@ -118,6 +127,7 @@ export default class index extends Component {
             <h3>YOUR REQUEST IS SENT FOR APPROVAL</h3>
             <p>Wait until our CSR reaches you out to provide assistance</p>
             <Button onClick={() => {this.isShowPopup(false)
+<<<<<<< HEAD
                 this.setState({on:true})  
           }
             }
@@ -126,6 +136,14 @@ export default class index extends Component {
           </div>
         </Modal>
         {this.state.on && <Third/>}
+=======
+              this.setState({onn:true})}}>DONE</Button>
+          </div>
+        </Modal>)
+        
+      </div>}
+      {this.state.onn&& <Third />}
+>>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
       </div>
     );
   }

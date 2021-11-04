@@ -4,7 +4,11 @@ import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
 import {token } from '../../Common/Utils'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Third from '../Addsetting'
+=======
+import Third from '../Addsetting/index'
+>>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
 =======
 import Third from '../Addsetting/index'
 >>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
@@ -128,6 +132,7 @@ export default class index extends Component {
             <p>Wait until our CSR reaches you out to provide assistance</p>
             <Button onClick={() => {this.isShowPopup(false)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 this.setState({on:true})  
           }
             }
@@ -139,10 +144,17 @@ export default class index extends Component {
 =======
               this.setState({onn:true})}}>DONE</Button>
           </div>
+=======
+              this.setState({onn:true})}}>DONE</Button>
+          </div>
+>>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
         </Modal>)
         
       </div>}
       {this.state.onn&& <Third />}
+<<<<<<< HEAD
+>>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
+=======
 >>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
       </div>
     );

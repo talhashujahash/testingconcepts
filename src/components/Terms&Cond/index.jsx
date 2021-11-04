@@ -3,15 +3,12 @@ import axios from "axios";
 import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
 import {token } from '../../Common/Utils'
-<<<<<<< HEAD
-<<<<<<< HEAD
-import Third from '../Addsetting'
-=======
+
+
+
+
 import Third from '../Addsetting/index'
->>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
-=======
-import Third from '../Addsetting/index'
->>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
+
 
 export default class index extends Component {
   constructor(props) {

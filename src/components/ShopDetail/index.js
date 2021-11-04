@@ -13,17 +13,16 @@ export default class index extends Component {
   constructor(props) {
     super();
     this.state = {
-      shop: props.shop,
-      shop_details: {
+        shop: props.shop,
         shop_name: "",
         shop_email: "",
         shop_number: "",
         shop_url: "",
         alcoholic_check: false,
-        drugs_check: false
-      },
+        drugs_check: false,
+   
       step: false,
-      loading: false,
+      loading: true,
       data: [],
 
 
@@ -32,6 +31,7 @@ export default class index extends Component {
 
 
   componentWillMount() {
+    alert(this.state.shop)
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${this.state.shop}`,
@@ -48,10 +48,10 @@ export default class index extends Component {
 
   next = (body) => {
     if (
-      this.state.shop_details.shop_email === "" &&
-      this.state.shop_details.shop_name === "" &&
-      this.state.shop_details.shop_number === "" &&
-      this.state.shop_details.shop_url === ""
+      this.state.shop_email === "" &&
+      this.state.shop_name === "" &&
+      this.state.shop_number === "" &&
+      this.state.shop_url === ""
     ) {
     } else {
       console.log(body);
@@ -60,12 +60,13 @@ export default class index extends Component {
   };
   render() {
     const { step } = this.state;
+    
     return (
       <div>
         {(this.state.loading) ? <Space size="middle"><Spin size="large" /></Space> :
           this.state.data[0]?.shop_name == null ? (
             <div>
-              {step && <TermsandCons body={this.state.shop_details} on={true} token={token} />}
+              {step && <TermsandCons body={this.state}  on={true} token={token} />}
               {!step && (
                 <div className="ShopD_style">
                   <img alt="" src={"image 1.png"} />

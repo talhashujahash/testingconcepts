@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
 import {token } from '../../Common/Utils'
-
+import Third from '../Addsetting/index'
 
 export default class index extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export default class index extends Component {
       on:props.on,
       token:props.token,
       body:props.body,
-      shop:props.shop,
+      onn:false,
       showModalPopup: false,
       accept: false,
     };
@@ -21,11 +21,11 @@ export default class index extends Component {
     this.setState({ showModalPopup: status });
   };
   next = () => {
-    console.log(this.state.token);
+    console.log(this.state.shop);
         axios
           .post(
             `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
-            { ...this.state.body,shop:this.state.shop },
+            { ...this.state.body },
             {
               headers: {
                 Authorization: token,
@@ -33,13 +33,18 @@ export default class index extends Component {
             }
           )
           .then(function (response) {
+            
             console.log(response);
+
           });
       
   };
   render() {
     return (
+      <div>
+        {(!this.state.onn)&&
       <div className="Termsmaincontainer">
+        
         {this.state.on && <img alt="" src={"image 1.png"}></img>}
         {this.state.on && <p className="color">step 2 OF 3</p>}
         <div className="Termsmaindiv">
@@ -116,9 +121,13 @@ export default class index extends Component {
             <img alt="" src={"congrat.png"}></img>
             <h3>YOUR REQUEST IS SENT FOR APPROVAL</h3>
             <p>Wait until our CSR reaches you out to provide assistance</p>
-            <Button onClick={() => this.isShowPopup(false)}>DONE</Button>
+            <Button onClick={() => {this.isShowPopup(false)
+              this.setState({onn:true})}}>DONE</Button>
           </div>
-        </Modal>
+        </Modal>)
+        
+      </div>}
+      {this.state.onn&& <Third />}
       </div>
     );
   }

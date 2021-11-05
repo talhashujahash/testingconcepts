@@ -20,7 +20,7 @@ export default class index extends Component {
       onn:false,
       showModalPopup: false,
       accept: false,
-      on:false
+      
     };
   }
   isShowPopup = (status) => {
@@ -128,31 +128,17 @@ export default class index extends Component {
             <h3>YOUR REQUEST IS SENT FOR APPROVAL</h3>
             <p>Wait until our CSR reaches you out to provide assistance</p>
             <Button onClick={() => {this.isShowPopup(false)
-<<<<<<< HEAD
-<<<<<<< HEAD
-                this.setState({on:true})  
-          }
-            }
-            >DONE</Button>
-           
-          </div>
-        </Modal>
-        {this.state.on && <Third/>}
-=======
+
               this.setState({onn:true})}}>DONE</Button>
           </div>
-=======
-              this.setState({onn:true})}}>DONE</Button>
-          </div>
->>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
+
+         
+
         </Modal>)
         
       </div>}
       {this.state.onn&& <Third />}
-<<<<<<< HEAD
->>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
-=======
->>>>>>> 5430cd9e53ba2dee2b90d6b657cb624847348a01
+
       </div>
     );
   }

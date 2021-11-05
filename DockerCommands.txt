@@ -1,0 +1,7 @@
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 599938016587.dkr.ecr.us-east-1.amazonaws.com
+yarn build
+docker build -t synergist-react-frontend .
+docker tag synergist-react-frontend:latest 599938016587.dkr.ecr.us-east-1.amazonaws.com/synergist-react-frontend:latest
+docker push 599938016587.dkr.ecr.us-east-1.amazonaws.com/synergist-react-frontend:latest
+aws ecs update-service  --service synergist-react-frontend --cluster shopifyapps-cluster-2 --force-new-deployment --region us-east-1
+

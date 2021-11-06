@@ -4,7 +4,8 @@ import "./Addsetting.css";
  import {email,pwd} from '../../Common/Utils'
 import {token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
-
+import {shop} from '../../App'
+// import { Shop } from "@mui/icons-material";
 export default class index extends Component {
 
   constructor(props) {
@@ -23,7 +24,7 @@ export default class index extends Component {
     componentWillMount() {
       axios
         .get(
-          `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=alche-app-development.myshopify.com`,
+          `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
           { headers: { Authorization: token } }
         )
         .then((res) => {

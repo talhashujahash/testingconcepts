@@ -1,13 +1,89 @@
+import axios from "axios";
 import React, { Component } from "react";
 import "./Addsetting.css";
+ import {email,pwd} from '../../Common/Utils'
+import {token } from '../../Common/Utils'
+import { Space, Spin } from "antd";
+
 export default class index extends Component {
+
+  constructor(props) {
+    super();
+    this.state = {
+    token:props.token,
+    domain: props.domain,
+    is_product_page:false,
+    is_checkout:false,
+    is_cart:false,
+    is_shopify_plus:false,
+    loading:true,
+    status:''
+
+    }}
+    componentWillMount() {
+      axios
+        .get(
+          `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=alche-app-development.myshopify.com`,
+          { headers: { Authorization: token } }
+        )
+        .then((res) => {
+         console.log(res.data.shop_details[0]);
+          this.setState({ is_shopify_plus: res.data.is_shopify_plus })
+          this.setState({ is_checkout: res.data.shop_details[0].is_checkout })
+          this.setState({ is_cart: res.data.shop_details[0].is_cart })
+          this.setState({ is_product_page: res.data.shop_details[0].is_product_page })
+          this.setState({ status: res.data.shop_details[0].status })
+          this.setState({ loading: false })
+        })
+    }
+    save = () => {
+      console.log(this.state);
+      axios
+      .put(
+        `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
+        { ...this.state,shop:this.state.domain || 'alche-app-development.myshopify.com', },
+        {
+          headers: {
+             Authorization:  token,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+              axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`,{
+         email:email,password:pwd
+      }).then((res)=>{
+        console.log(res);
+          axios
+            .put(
+              `${process.env.REACT_APP_BACKEND_URL2}/stores/store_setting_for_app?domain=${this.state.domain}`,
+              { ...this.state },
+              {
+                headers: {
+                   Authorization: "Token " + res.data.token,
+                },
+              }
+            )
+            .then(function (response) {
+              console.log(response);
+  
+            });
+          })        
+         })
+    };
   render() {
     console.log(this.props.token)
+  
     return (
+      <div>
+      {(this.state.loading) ? <Space size="middle"><Spin size="large" /></Space> :
+      <div>
+      {(this.state.status)!=='pending'&& (this.state.status)==='approved'? 
       <div className="Addsetting">
         <div className="Addsettinghead">
           <div className="d-flex">
             <svg
+              
               style={{ minWidth: "14px" }}
               width="20"
               height="20"
@@ -44,67 +120,67 @@ export default class index extends Component {
             </div>
           </div>
           <div>
-            <button className="Addsettingbutton1">Cancel</button>
-            <button className="Addsettingbutton2">Save</button>
+            {/* <button className="Addsettingbutton1">Cancel</button> */}
+            <button className="Addsettingbutton2" onClick={this.save}>Save</button>
           </div>
         </div>
         <div className="d-flex checkbox">
-          <div className="borderstyle">
-            <input type="checkbox" /> <label>Product</label>
+          <div className="borderstyle custompadding">
+            <input type="checkbox" checked={this.state.is_product_page} onChange={() => {
+                            this.setState({
+                              is_product_page: !this.state.is_product_page,
+                            });
+                          }} /> <label>Product</label>
             <div>
               <div className="d-flex ">
                 Preview{" "}
-                <div className="queryicon justify-content">
-                  <img className="queryico_p3" alt="" src={"vetor.png"}></img>
-                  <img className="queryico_p1" alt="" src={"vector.png"}></img>
-                  <img
-                    className="queryico_p2"
-                    alt=""
-                    src={"Vector(1).png"}
-                  ></img>
+                <div className=" justify-content">
+                <img  alt="" src={'Queryimg.png'}></img>
                 </div>
               </div>
               <img className="imgAdsetting" src="Product.png" alt="" />
             </div>
           </div>
-          <div>
-            <div>
-              <input type="checkbox" /> <label>Shopping Cart</label>
+          <div className='custompadding'>
+            <div >
+              <input type="checkbox" checked={this.state.is_cart} onChange={() => {
+                            this.setState({
+                              is_cart: !this.state.is_cart,
+                            });
+                          }}/> <label>Shopping Cart</label>
               <div className="d-flex ">
                 Preview{" "}
-                <div className="queryicon justify-content">
-                  <img className="queryico_p3" alt="" src={"vetor.png"}></img>
-                  <img className="queryico_p1" alt="" src={"vector.png"}></img>
-                  <img
-                    className="queryico_p2"
-                    alt=""
-                    src={"Vector(1).png"}
-                  ></img>
+                <div className=" justify-content">
+                  
+                  <img  alt="" src={'Queryimg.png'}></img>
+                  
+
                 </div>
               </div>
               <img className="imgAdsetting" src="CartPage.png" alt="" />
             </div>
           </div>
-          <div>
-            <input type="checkbox" />
+          {this.state.is_shopify_plus && <div className='custompadding'>
+            <input type="checkbox"  checked={this.state.is_checkout} onChange={() => {
+                            this.setState({
+                              is_checkout: !this.state.is_checkout,
+                            });
+                          }} />
             <label>Checkout</label>
             <div>
               <div className="d-flex">
                 Preview{" "}
-                <div className="queryicon justify-content">
-                  <img className="queryico_p3" alt="" src={"vetor.png"}></img>
-                  <img className="queryico_p1" alt="" src={"vector.png"}></img>
-                  <img
-                    className="queryico_p2"
-                    alt=""
-                    src={"Vector(1).png"}
-                  ></img>
+                <div className=" justify-content">
+                <img  alt="" src={'Queryimg.png'}></img>
                 </div>
               </div>
               <img className="imgAdsetting" src="checkout.jpg" alt="" />
             </div>
-          </div>
+          </div>}
         </div>
+        </div>:<div style={{ boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',maxWidth:'409px',maxHeight:'200px',fontSize:'30px',fontWeight:'600px',color:'blueviolet',margin:'auto',marginTop:'10%'}}>{(this.state.status)==='pending' &&  (this.state.status)!=='disapproved'? <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignContent:'center'}}><center>Wating for Admin Approval</center><center><Space size="large"><Spin size="large" /></Space></center></div>:<div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignContent:'center'}}><center>Admin Disapproved Your Request</center><center><Space size="large"><Spin size="large" /></Space></center></div>}</div>}
+      </div>}
+       
       </div>
     );
   }

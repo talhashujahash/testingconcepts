@@ -2,14 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
-import {token } from '../../Common/Utils'
-
-
-
-
+ import {token } from '../../Common/Utils'
 import Third from '../Addsetting/index'
-
-
+import {email,pwd} from '../../Common/Utils'
+import {shop} from '../../App'
 export default class index extends Component {
   constructor(props) {
     super();
@@ -25,13 +21,16 @@ export default class index extends Component {
   }
   isShowPopup = (status) => {
     this.setState({ showModalPopup: status });
+
   };
+  // /notifications/notification /shop_details`,
   next = () => {
+    console.log(this.state.body);
     console.log(this.state.shop);
-        axios
+    axios
           .post(
             `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
-            { ...this.state.body },
+            { ...this.state.body,shop:shop },
             {
               headers: {
                 Authorization: token,
@@ -41,9 +40,29 @@ export default class index extends Component {
           .then(function (response) {
             
             console.log(response);
+             axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`,{
+       email:email,password:pwd
+    }).then((res)=>{
+      console.log(res);
+        axios
+          .post(
+            `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
+            { ...this.state.body },
+            {
+              headers: {
+                 Authorization: "Token " + res.data.token,
+              },
+            }
+          )
+          .then(function (response) {
+            console.log(response);
 
           });
-      
+        
+         })
+
+          });
+   
   };
   render() {
     return (
@@ -131,13 +150,10 @@ export default class index extends Component {
 
               this.setState({onn:true})}}>DONE</Button>
           </div>
-
-         
-
-        </Modal>)
+        </Modal>
         
       </div>}
-      {this.state.onn&& <Third />}
+      {this.state.onn&& <Third domain={this.state.body.domain} token={token} />}
 
       </div>
     );

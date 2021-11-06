@@ -4,67 +4,67 @@ import { Link } from "react-router-dom";
 import TermsandCons from "../Terms&Cond";
 import Third from "../Addsetting";
 import "./ShopDetail.css";
+import { shop } from '../../App'
 import { token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
-
-
 //const emailValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export default class index extends Component {
   constructor(props) {
     super();
     this.state = {
-      shop: props.shop,
+      shop_url: props.shop,
       shop_name: "",
       shop_email: "",
       shop_number: "",
-      shop_url: "",
       alcoholic_check: false,
       drugs_check: false,
       step: false,
       loading: true,
       data: [],
+      is_shopify_plus: false,
+      collections: []
     };
   }
-
+  // ${this.state.shop}
 
   componentWillMount() {
-    alert(this.state.shop)
+    // alert(this.state.shop)
     axios
       .get(
-        `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${this.state.shop}`,
+        `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
         { headers: { Authorization: token } }
       )
       .then((res) => {
         console.log(res.data);
         this.setState({ data: res.data.shop_details })
+        this.setState({ is_shopify_plus: res.data.is_shopify_plus })
+        this.setState({ collections: res.data.collections })
         this.setState({ loading: false })
+
       })
   }
-
-
 
   next = (body) => {
     if (
 
-      this.state.shop_email === "" &&
-      this.state.shop_name === "" &&
-      this.state.shop_number === "" &&
-      this.state.shop_url === ""
+      this.state.shop_email !== "" &&
+      this.state.shop_name !== "" &&
+      this.state.shop_number !== "" &&
+      this.state.shop_url !== ""
     ) { this.setState({ step: true }) }
     else {
       console.log(body);
-
     }
   };
   render() {
-    const { step } = this.state;
-
+    const { step, shop_name, shop_url, shop_number, shop_email, alcoholic_check, drugs_check, is_shopify_plus, collections } = this.state;
+    let requestdata = { name: shop_name, domain: shop_url, phone: shop_number, collections: collections, email: shop_email, status: 'pending', is_drug: drugs_check, is_alcoholic: alcoholic_check, is_shopify_plus: is_shopify_plus }
     return (
       <div>
         {(this.state.loading) ? <Space size="middle"><Spin size="large" /></Space> :
-          this.state.data[0]?.shop_name == null ? (
+          this.state.data[0]?.name == null || '' ? (
             <div>
-              {step && <TermsandCons body={this.state} on={true} token={token} />}
+              {step && <TermsandCons body={requestdata} on={true} token={token} />}
               {!step && (
                 <div className="ShopD_style">
                   <img alt="" src={"image 1.png"} />
@@ -128,13 +128,14 @@ export default class index extends Component {
                       <label className="color_blue"> Store URL</label>{" "}
                       <input
                         className="shopDetaildropdown"
-                        placeholder="Url"
+                        placeholder={shop_url}
                         name="shop_url"
                         type="url"
                         required="true"
-                        onChange={(e) => {
-                          this.setState({ [e.target.name]: e.target.value });
-                        }}
+                        readOnly='true'
+                      // onChange={(e) => {
+                      //   this.setState({ [e.target.name]: e.target.value });
+                      // }}
                       ></input>
                     </div>{" "}
                     <div className="fieldstyle">

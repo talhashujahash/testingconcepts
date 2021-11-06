@@ -8,8 +8,8 @@ export default class index extends Component {
         style={{
           width: "100%",
           backgroundColor: "#4939B5",
-          minHeight: "8vh",
-          padding: "",
+          minHeight: "50px",
+          paddingTop: "15px",
           display: "grid",
           gridTemplateColumns: "6fr 3fr ",
           color: "#ffffff",

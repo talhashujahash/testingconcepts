@@ -10,7 +10,7 @@ export default class index extends Component {
     this.state = {
       showModalPopup: false,
       shop: props.shop,
-      token: props.token,
+      token: '',
       email: "",
       name: "",
       description: "",
@@ -32,21 +32,28 @@ export default class index extends Component {
       this.state.phone !== ""
     ) {
       console.log(this.state);
-
       axios
-        .post(
-          `${process.env.REACT_APP_BACKEND_URL}/contact_details`,
-          { ...this.state },
-          {
-            headers: {
-              Authorization: "Token " + this.state.token,
-            },
-          }
-        )
-        .then(function (response) {
-          console.log(response);
-        });
+        .post(`${process.env.REACT_APP_BACKEND_URL}/get_token`, {
+          domain: this.state.shop || 'alche-app-development.myshopify.com',
+        })
+        .then((res) => {
+          console.log(res.data.token)
+          this.setState({ token: res.data.token })
 
+          axios
+            .post(
+              `${process.env.REACT_APP_BACKEND_URL}/contact_details`,
+              { ...this.state, shop: this.state.shop || 'alche-app-development.myshopify.com' },
+              {
+                headers: {
+                  Authorization: "Token " + this.state.token,
+                },
+              }
+            )
+            .then(function (response) {
+              console.log(response);
+            });
+        });
     }
   };
   onChangeRadio = (e) => {

@@ -5,7 +5,7 @@ import TermsandCons from "../Terms&Cond";
 import Third from "../Addsetting";
 import "./ShopDetail.css";
 import { shop } from '../../App'
-import {email,pwd} from '../../Common/Utils'
+import { email, pwd } from '../../Common/Utils'
 import { token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
 //const emailValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -44,27 +44,27 @@ export default class index extends Component {
 
       })
 
-      axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`,{
-        email:email,password:pwd
-     }).then((res)=>{
-       console.log(res);
+    axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
+      email: email, password: pwd
+    }).then((res) => {
+      console.log(res);
 
-     
-         axios
-           .get(
-             `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
-             {
-               headers: {
-                  Authorization: "Token "+res.data.token,
-               },
-             }
-           )
-           .then(function (response) {
-             console.log(response);
- 
-           });
-          })
-          
+
+      axios
+        .get(
+          `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
+          {
+            headers: {
+              Authorization: "Token " + res.data.token,
+            },
+          }
+        )
+        .then(function (response) {
+          console.log(response);
+
+        });
+    })
+
   }
 
   next = (body) => {
@@ -84,7 +84,7 @@ export default class index extends Component {
     let requestdata = { name: shop_name, domain: shop_url, phone: shop_number, collections: collections, email: shop_email, status: 'pending', is_drug: drugs_check, is_alcoholic: alcoholic_check, is_shopify_plus: is_shopify_plus }
     return (
       <div>
-        {(this.state.loading) ? <Space size="middle"><Spin size="large" /></Space> :
+        {(this.state.loading) && false ? <Space size="middle"><Spin size="large" /></Space> :
           this.state.data[0]?.name == null || '' ? (
             <div>
               {step && <TermsandCons body={requestdata} on={true} token={token} />}
@@ -96,12 +96,13 @@ export default class index extends Component {
                     <h4 className="color_blue"> ADD SHOP DETAILS </h4>{" "}
                   </div>
                   <div>
-                    <p>
+
+                    <p className='ShopD_style_p'>
                       {" "}
-                    Helping text explaing why we are getting this info will be
-                    displayed here and question mark at the end will take us to
-                    the FAQ section <Link to="#"> Read more </Link>
+                      Thank you for selecting Synergist to improve your conversion rate. Please provide some information about you so we can set up your account and contact you if need be. We will also review your information shortly to ensure your site meets our bank partner requirements. We will not share your contact information with any third parties
+                      {/* <Link to="#"> Read more </Link> */}
                     </p>
+
                   </div>
 
                   <div className="formstyle">
@@ -141,7 +142,7 @@ export default class index extends Component {
                         placeholder="number"
                         name="shop_number"
                         required="true"
-                        type="number"
+                        type="text"
                         onChange={(e) => {
                           this.setState({ [e.target.name]: e.target.value });
                         }}

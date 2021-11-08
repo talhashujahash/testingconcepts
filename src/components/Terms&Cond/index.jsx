@@ -11,7 +11,7 @@ export default class index extends Component {
     super();
     this.state = {
       on: props.on,
-      token: props.token,
+    
       body: props.body,
       onn: false,
       showModalPopup: false,
@@ -42,7 +42,7 @@ export default class index extends Component {
     });
   }
 
-  // /notifications/notification /shop_details`,
+  // /shop_details`,
   next = () => {
 
     axios.post(
@@ -58,7 +58,7 @@ export default class index extends Component {
         console.log(response);
       })
 
-    
+      
       axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
       email: email, password: pwd
     }).then((res) => {
@@ -67,14 +67,9 @@ export default class index extends Component {
             token:res.data.token
           })
           this.notification()
-      
         }).catch(err =>{
             this.notification()
         })
-
-
-   
-
 };
 render() {
   return (

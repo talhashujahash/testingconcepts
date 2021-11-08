@@ -24,24 +24,24 @@ export const shop = value.shop
 class App extends Component {
   constructor(props) {
     super();
-    this.state = {
-      token1: ''
-    }
+    // this.state = {
+    //   token1: ''
+    // }
   }
-  token1 = () => {
-    return 'gg';
+  // token1 = () => {
+  //   return 'gg';
 
-  }
-  componentWillMount() {
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/get_token`, {
-        domain: shop,
-      })
-      .then((res) => {
-        console.log(res.data.token)
-        this.setState({ token1: 'res.data.token' })
-      });
-  }
+  // }
+  // componentWillMount() {
+  //   axios
+  //     .post(`${process.env.REACT_APP_BACKEND_URL}/get_token`, {
+  //       domain: shop,
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data.token)
+  //       this.setState({ token1: 'res.data.token' })
+  //     });
+  // }
 
   render() {
     return (
@@ -60,12 +60,12 @@ class App extends Component {
             <Route path="/setting">
 
               <Navbar />
-              <Third token={this.state.token1} shop={shop} />
+              <Third shop={shop} />
             </Route>
             <Route path="/contactus">
 
               <Navbar />
-              <Contactus token={this.state.token1} shop={shop} />
+              <Contactus shop={shop} />
             </Route>
           </Switch>
         </Router>

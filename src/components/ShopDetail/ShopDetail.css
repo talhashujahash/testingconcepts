@@ -5,10 +5,11 @@
   text-align: center;
   align-items: center;
 }
-.ShopD_style p {
-  padding-left: 12%;
-  padding-right: 12%;
+.ShopD_style_p {
+  max-width: 50vw;
+  font-size: 12px;
 }
+
 .color_blue {
   color: #4939b5;
 }

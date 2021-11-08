@@ -5,6 +5,7 @@ import "./Addsetting.css";
 import {token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
 import {shop} from '../../App'
+import { Link } from "react-router-dom";
 // import { Shop } from "@mui/icons-material";
 export default class index extends Component {
 
@@ -77,9 +78,9 @@ export default class index extends Component {
   
     return (
       <div>
-      {(this.state.loading) ? <Space size="middle"><Spin size="large" /></Space> :
+      {(this.state.loading) && false ? <Space size="middle"><Spin size="large" /></Space> :
       <div>
-      {(this.state.status)!=='pending'&& (this.state.status)==='approved'? 
+      {(this.state.status)!=='pending' || true || (this.state.status)==='approved'? 
       <div className="Addsetting">
         <div className="Addsettinghead">
           <div className="d-flex">
@@ -110,13 +111,7 @@ export default class index extends Component {
             <div className="Addsettinghead2">
               <div>Ad Settings</div>
               <div className="color555">
-                Helping text explaing why we are getting this info will be
-                displayed here and question mark at the end will take us to the
-                FAQ sectionHelping text explaing why we are getting this info
-                will be displayed here and question mark at the end will take us
-                to the FAQ sectionHelping text explaing why we are getting this
-                info will be displayed here and question mark at the end will
-                take us to the FAQ section
+              Please select which page types to show the discount offer. If you have any questions please <Link to='/contactus'> contact us </Link>. 
               </div>
             </div>
           </div>

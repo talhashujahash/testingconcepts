@@ -5,6 +5,7 @@ import TermsandCons from "../Terms&Cond";
 import Third from "../Addsetting";
 import "./ShopDetail.css";
 import { shop } from '../../App'
+import {email,pwd} from '../../Common/Utils'
 import { token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
 //const emailValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -42,6 +43,28 @@ export default class index extends Component {
         this.setState({ loading: false })
 
       })
+
+      axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`,{
+        email:email,password:pwd
+     }).then((res)=>{
+       console.log(res);
+
+     
+         axios
+           .get(
+             `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
+             {
+               headers: {
+                  Authorization: "Token "+res.data.token,
+               },
+             }
+           )
+           .then(function (response) {
+             console.log(response);
+ 
+           });
+          })
+          
   }
 
   next = (body) => {

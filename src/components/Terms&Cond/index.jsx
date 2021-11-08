@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
-import { token } from '../../Common/Utils'
+// import { token } from '../../Common/Utils'
 import Third from '../Addsetting/index'
 // import { email, pwd } from '../../Common/Utils'
 import { shop } from '../../App'
@@ -161,7 +161,7 @@ render() {
           </Modal>
 
         </div>}
-      {this.state.onn && <Third domain={this.state.body.domain} token={token} />}
+      {this.state.onn && <Third domain={this.state.body.domain}  />}
 
     </div>
   );

@@ -7,8 +7,8 @@ import Head from "./components/header";
 import Navbar from "./components/navbar";
 import Contactus from "./components/Contact us";
 import queryString from 'query-string'
-// import axios from "axios";
-import { token } from './Common/Utils'
+import axios from "axios";
+// import { token } from './Common/Utils'
 import { Component } from "react";
 import 'antd/dist/antd.css';
 
@@ -58,11 +58,11 @@ class App extends Component {
           <Head />
           <Switch>
             <Route exact path="/">
-              <First status={this.state.status} token={token} shop={shop} />
+              <First status={this.state.status} shop={shop} />
             </Route>
             <Route path="/termscond">
               <Navbar status={this.state.status} />
-              <Second token={token} shop={shop} on={false} />
+              <Second shop={shop} on={false} />
             </Route>
             <Route path="/setting">
               <Navbar status={this.state.status} />

@@ -5,8 +5,8 @@ import TermsandCons from "../Terms&Cond";
 import Third from "../Addsetting";
 import "./ShopDetail.css";
 import { shop } from '../../App'
-import { email, pwd } from '../../Common/Utils'
-import { token } from '../../Common/Utils'
+// import { email, pwd } from '../../Common/Utils'
+// import { token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
 import NavBar from '../navbar/index'
 //const emailValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,7 +48,7 @@ export default class index extends Component {
       })
 
     axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
-      email: email, password: pwd
+      email: process.env.email, password: process.env.pwd
     }).then((res) => {
       console.log(res);
 
@@ -90,7 +90,7 @@ export default class index extends Component {
         {(this.state.loading) ? <Space size="middle"><Spin size="large" /></Space> :
           this.state.data[0]?.name == null || '' ? (
             <div>
-              {step && <TermsandCons body={requestdata} on={true} token={token} />}
+              {step && <TermsandCons body={requestdata} on={true} />}
               {!step && (
                 <div className="ShopD_style">
                   <img alt="" src={"image 1.png"} />
@@ -208,7 +208,7 @@ export default class index extends Component {
                 </div>
               )}
             </div>
-          ) : <div><NavBar status={this.state.status} /><Third token={token} shop={this.state.shop} /></div>}
+          ) : <div><NavBar status={this.state.status} /><Third shop={this.state.shop} /></div>}
 
       </div>
     );

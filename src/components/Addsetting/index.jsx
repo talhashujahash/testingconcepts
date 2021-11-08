@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { Component } from "react";
 import "./Addsetting.css";
 //  import {email,pwd} from '../../Common/Utils'
-import {token } from '../../Common/Utils'
+// import {token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
 import {shop} from '../../App'
 import { Link } from "react-router-dom";
@@ -56,7 +56,7 @@ export default class index extends Component {
         { ...this.state,shop:this.state.domain || 'alche-app-development.myshopify.com', },
         {
           headers: {
-             Authorization:  token,
+             Authorization:  process.env.token,
           },
         }
       )

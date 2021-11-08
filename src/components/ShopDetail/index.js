@@ -24,7 +24,8 @@ export default class index extends Component {
       loading: true,
       data: [],
       is_shopify_plus: false,
-      collections: []
+      collections: [],
+      status: ''
     };
   }
   // ${this.state.shop}
@@ -34,13 +35,14 @@ export default class index extends Component {
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
-        { headers: { Authorization: token } }
+        { headers: { Authorization: process.env.token } }
       )
       .then((res) => {
         console.log(res.data);
         this.setState({ data: res.data.shop_details })
         this.setState({ is_shopify_plus: res.data.is_shopify_plus })
         this.setState({ collections: res.data.collections })
+        this.setState({ status: res.data.shop_details[0].status })
         this.setState({ loading: false })
 
       })
@@ -206,7 +208,7 @@ export default class index extends Component {
                 </div>
               )}
             </div>
-          ) : <div><NavBar /><Third token={token} shop={this.state.shop} /></div>}
+          ) : <div><NavBar status={this.state.status} /><Third token={token} shop={this.state.shop} /></div>}
 
       </div>
     );

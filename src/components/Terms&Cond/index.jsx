@@ -4,14 +4,13 @@ import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
 import { token } from '../../Common/Utils'
 import Third from '../Addsetting/index'
-import { email, pwd } from '../../Common/Utils'
+// import { email, pwd } from '../../Common/Utils'
 import { shop } from '../../App'
 export default class index extends Component {
   constructor(props) {
     super();
     this.state = {
       on: props.on,
-    
       body: props.body,
       onn: false,
       showModalPopup: false,
@@ -50,7 +49,7 @@ export default class index extends Component {
       { ...this.state.body, shop: shop },
       {
         headers: {
-          Authorization: token,
+          Authorization: process.env.token,
         },
       }
     )
@@ -60,7 +59,7 @@ export default class index extends Component {
 
       
       axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
-      email: email, password: pwd
+      email: process.env.email, password: process.env.pwd
     }).then((res) => {
       console.log(res);
           this.setState({

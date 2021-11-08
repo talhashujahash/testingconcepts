@@ -24,9 +24,9 @@ export const shop = value.shop
 class App extends Component {
   constructor(props) {
     super();
-    // this.state = {
-    //   token1: ''
-    // }
+    this.state = {
+      status: ''
+    }
   }
 
   // componentWillMount() {
@@ -39,7 +39,17 @@ class App extends Component {
   //       this.setState({ token1: 'res.data.token' })
   //     });
   // }
-
+  componentWillMount() {
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
+        { headers: { Authorization: process.env.token } }
+      )
+      .then((res) => {
+        console.log(res.data.shop_details[0]);
+        this.setState({ status: res.data.shop_details[0].status })
+      })
+  }
   render() {
     return (
       <div className="App">
@@ -48,19 +58,19 @@ class App extends Component {
           <Head />
           <Switch>
             <Route exact path="/">
-              <First token={token} shop={shop} />
+              <First status={this.state.status} token={token} shop={shop} />
             </Route>
             <Route path="/termscond">
-              <Navbar />
+              <Navbar status={this.state.status} />
               <Second token={token} shop={shop} on={false} />
             </Route>
             <Route path="/setting">
-              <Navbar />
+              <Navbar status={this.state.status} />
               <Third shop={shop} />
             </Route>
             <Route path="/contactus">
 
-              <Navbar />
+              <Navbar status={this.state.status} />
               <Contactus shop={shop} />
             </Route>
           </Switch>

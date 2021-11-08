@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import "./Addsetting.css";
- import {email,pwd} from '../../Common/Utils'
+//  import {email,pwd} from '../../Common/Utils'
 import {token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
 import {shop} from '../../App'
@@ -35,7 +35,7 @@ export default class index extends Component {
       axios
         .get(
           `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
-          { headers: { Authorization: token } }
+          { headers: { Authorization: process.env.token } }
         )
         .then((res) => {
          console.log(res.data.shop_details[0]);
@@ -63,7 +63,7 @@ export default class index extends Component {
       .then(function (response) {
         console.log(response);
               axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`,{
-         email:email,password:pwd
+         email:process.env.email,password:process.env.pwd
       }).then((res)=>{
         console.log(res);
           axios

@@ -48,7 +48,7 @@ export default class index extends Component {
             <Link to="/second">
               <li style={{ color: "white" }}>Terms&nbsp;and&nbsp;Conditions</li>
             </Link>
-            <li><input type="checkbox" disabled='true' /> Approved</li>
+            <li><input type="checkbox" disabled='true' checked={this.props.status === 'approved'} /> Approved</li>
           </ul>
         </div>
       </div>

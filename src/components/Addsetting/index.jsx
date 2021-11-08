@@ -19,9 +19,18 @@ export default class index extends Component {
     is_cart:false,
     is_shopify_plus:false,
     loading:true,
-    status:''
+    status:'',
+    is_assets:''
+
 
     }}
+    componentDidMount(){
+      if(this.state.status==='approved' && this.state.is_assets_installed===false){
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/assets_api`,{
+          shop:shop
+        })
+      }
+    }
     componentWillMount() {
       axios
         .get(
@@ -35,6 +44,7 @@ export default class index extends Component {
           this.setState({ is_cart: res.data.shop_details[0].is_cart })
           this.setState({ is_product_page: res.data.shop_details[0].is_product_page })
           this.setState({ status: res.data.shop_details[0].status })
+          this.setState({is_assets: res.data.shop_details[0].is_assets_installed})
           this.setState({ loading: false })
         })
     }
@@ -80,7 +90,7 @@ export default class index extends Component {
       <div>
       {(this.state.loading)  ? <Space size="middle"><Spin size="large" /></Space> :
       <div>
-      {(this.state.status)!=='pending' && (this.state.status)==='approved'? 
+      {(this.state.status)!=='pending' && (this.state.status)==='approved' ? 
       <div className="Addsetting">
         <div className="Addsettinghead">
           <div className="d-flex">

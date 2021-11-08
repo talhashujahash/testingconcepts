@@ -7,7 +7,7 @@ import Head from "./components/header";
 import Navbar from "./components/navbar";
 import Contactus from "./components/Contact us";
 import queryString from 'query-string'
-import axios from "axios";
+// import axios from "axios";
 import { token } from './Common/Utils'
 import { Component } from "react";
 import 'antd/dist/antd.css';
@@ -28,10 +28,7 @@ class App extends Component {
     //   token1: ''
     // }
   }
-  // token1 = () => {
-  //   return 'gg';
 
-  // }
   // componentWillMount() {
   //   axios
   //     .post(`${process.env.REACT_APP_BACKEND_URL}/get_token`, {
@@ -58,7 +55,6 @@ class App extends Component {
               <Second token={token} shop={shop} on={false} />
             </Route>
             <Route path="/setting">
-
               <Navbar />
               <Third shop={shop} />
             </Route>

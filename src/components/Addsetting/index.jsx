@@ -78,9 +78,9 @@ export default class index extends Component {
   
     return (
       <div>
-      {(this.state.loading) && false ? <Space size="middle"><Spin size="large" /></Space> :
+      {(this.state.loading)  ? <Space size="middle"><Spin size="large" /></Space> :
       <div>
-      {(this.state.status)!=='pending' || true || (this.state.status)==='approved'? 
+      {(this.state.status)!=='pending' && (this.state.status)==='approved'? 
       <div className="Addsetting">
         <div className="Addsettinghead">
           <div className="d-flex">

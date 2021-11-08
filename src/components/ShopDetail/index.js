@@ -84,7 +84,7 @@ export default class index extends Component {
     let requestdata = { name: shop_name, domain: shop_url, phone: shop_number, collections: collections, email: shop_email, status: 'pending', is_drug: drugs_check, is_alcoholic: alcoholic_check, is_shopify_plus: is_shopify_plus }
     return (
       <div>
-        {(this.state.loading) && false ? <Space size="middle"><Spin size="large" /></Space> :
+        {(this.state.loading) ? <Space size="middle"><Spin size="large" /></Space> :
           this.state.data[0]?.name == null || '' ? (
             <div>
               {step && <TermsandCons body={requestdata} on={true} token={token} />}

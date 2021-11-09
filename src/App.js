@@ -1,8 +1,8 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import First from "./components/ShopDetail";
-import Second from "./components/Terms&Cond";
-import Third from "./components/Addsetting";
+import Setting from "./components/ShopDetail";
+import Terms from "./components/Terms&Cond";
+import Adsetting from "./components/Addsetting";
 import Head from "./components/header";
 import Navbar from "./components/navbar";
 import Contactus from "./components/Contact us";
@@ -46,23 +46,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
         <Router>
           <Head />
           <Switch>
             <Route exact path="/">
-              <First status={this.state.status} shop={shop} />
+              <Setting status={this.state.status} shop={shop} />
             </Route>
             <Route path="/termscond">
               <Navbar status={this.state.status} />
-              <Second shop={shop} on={false} />
+              <Term shop={shop} on={false} />
             </Route>
             <Route path="/setting">
               <Navbar status={this.state.status} />
-              <Third shop={shop} />
+              <Adsetting shop={shop} />
             </Route>
             <Route path="/contactus">
-
               <Navbar status={this.state.status} />
               <Contactus shop={shop} />
             </Route>

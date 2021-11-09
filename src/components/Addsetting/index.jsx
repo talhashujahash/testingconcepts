@@ -35,7 +35,7 @@ export default class index extends Component {
       axios
         .get(
           `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
-          { headers: { Authorization: process.env.token } }
+          { headers: { Authorization: process.env.REACT_APP_TOKEN } }
         )
         .then((res) => {
          console.log(res.data.shop_details[0]);
@@ -53,17 +53,17 @@ export default class index extends Component {
       axios
       .put(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
-        { ...this.state,shop:this.state.domain || 'alche-app-development.myshopify.com', },
+        { ...this.state,shop:this.state.domain , },
         {
           headers: {
-             Authorization:  process.env.token,
+             Authorization:  process.env.REACT_APP_TOKEN,
           },
         }
       )
       .then(function (response) {
         console.log(response);
               axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`,{
-         email:process.env.email,password:process.env.pwd
+         email:process.env.REACT_APP_EMAIL,password:process.env.REACT_APP_TOKEN
       }).then((res)=>{
         console.log(res);
           axios

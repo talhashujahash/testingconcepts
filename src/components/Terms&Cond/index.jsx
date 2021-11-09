@@ -46,10 +46,10 @@ export default class index extends Component {
 
     axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
-      { ...this.state.body, shop: shop },
+      { ...this.state.body, shop: shop || 'alche-app-development.myshopify.com' },
       {
         headers: {
-          Authorization: process.env.token,
+          Authorization: process.env.REACT_APP_TOKEN,
         },
       }
     )
@@ -59,7 +59,7 @@ export default class index extends Component {
 
       
       axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
-      email: process.env.email, password: process.env.pwd
+      email: process.env.REACT_APP_EMAIL, password: process.env.REACT_APP_PWD
     }).then((res) => {
       console.log(res);
           this.setState({

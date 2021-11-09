@@ -35,7 +35,7 @@ export default class index extends Component {
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
-        { headers: { Authorization: process.env.token } }
+        { headers: { Authorization: process.env.REACT_APP_TOKEN } }
       )
       .then((res) => {
         console.log(res.data);
@@ -48,7 +48,7 @@ export default class index extends Component {
       })
 
     axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
-      email: process.env.email, password: process.env.pwd
+      email: process.env.REACT_APP_EMAIL, password: process.env.REACT_APP_PWD
     }).then((res) => {
       console.log(res);
 
@@ -87,7 +87,7 @@ export default class index extends Component {
     let requestdata = { name: shop_name, domain: shop_url, phone: shop_number, collections: collections, email: shop_email, status: 'pending', is_drug: drugs_check, is_alcoholic: alcoholic_check, is_shopify_plus: is_shopify_plus }
     return (
       <div>
-        {(this.state.loading) ? <Space size="middle"><Spin size="large" /></Space> :
+        {(this.state.loading) && false ? <Space size="middle"><Spin size="large" /></Space> :
           this.state.data[0]?.name == null || '' ? (
             <div>
               {step && <TermsandCons body={requestdata} on={true} />}

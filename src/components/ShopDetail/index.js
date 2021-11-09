@@ -43,12 +43,10 @@ export default class index extends Component {
           this.setState({ status: res.data.shop_details[0].status })
         }
         this.setState({
+          loading: false,
           data: res.data.shop_details,
           is_shopify_plus: res.data.is_shopify_plus,
-          collections: res.data.collections,
-          loading: false,
-
-
+          collections: res.data.collections
         })
 
       })
@@ -94,7 +92,7 @@ export default class index extends Component {
     return (
       <div>
         {(this.state.loading) ? <Space size="middle"><Spin size="large" /></Space> :
-          this.state.data[0]?.name === null || '' ? (
+          this.state.data[0]?.name === null || this.state.data.length === 0 ? (
             <div>
               {step && <TermsandCons body={requestdata} on={true} />}
               {!step && (

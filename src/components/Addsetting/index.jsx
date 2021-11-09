@@ -21,8 +21,6 @@ export default class index extends Component {
     loading:true,
     status:'',
     is_assets:''
-
-
     }}
     componentDidMount(){
       if(this.state.status==='approved' && this.state.is_assets_installed===false){

@@ -43,7 +43,7 @@ class App extends Component {
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
-        { headers: { Authorization: process.env.TOKEN } }
+        { headers: { Authorization: "Bearer e8ca54832038db60ede62e44827fc054eabfc2de" } }
       )
       .then((res) => {
         console.log(res.data.shop_details[0]);

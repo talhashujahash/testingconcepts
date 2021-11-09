@@ -35,7 +35,7 @@ export default class index extends Component {
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
-        { headers: { Authorization: process.env.SYNERGIST_TOKEN } }
+        { headers: { Authorization: "Bearer e8ca54832038db60ede62e44827fc054eabfc2de" } }
       )
       .then((res) => {
         console.log(res.data);
@@ -48,7 +48,7 @@ export default class index extends Component {
       })
 
     axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
-      email: process.env.SYNERGIST_EMAIL, password: process.env.SYNERGIST_PWD
+      email: 'shopify-app-admin', password: 'Admin@1209'
     }).then((res) => {
       console.log(res);
 

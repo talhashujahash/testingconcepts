@@ -16,11 +16,15 @@ export default class index extends Component {
       showModalPopup: false,
       accept: false,
       token:""
+
     };
   }
   isShowPopup = (status) => {
     this.setState({ showModalPopup: status });
+
   };
+
+  
   notification = () => {
     axios.post(
       `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
@@ -36,22 +40,26 @@ export default class index extends Component {
 
     });
   }
+
   // /shop_details`,
   next = () => {
+
     axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
       { ...this.state.body, shop: shop },
       {
         headers: {
-          Authorization: "Bearer e8ca54832038db60ede62e44827fc054eabfc2de",
+          Authorization: process.env.token,
         },
       }
     )
       .then(function (response) {
         console.log(response);
       })
+
+      
       axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
-      email: 'shopify-app-admin', password: 'Admin@1209'
+      email: process.env.email, password: process.env.pwd
     }).then((res) => {
       console.log(res);
           this.setState({
@@ -133,6 +141,7 @@ render() {
               </div>
             )}
           </div>
+
           <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
@@ -150,6 +159,7 @@ render() {
               }}>DONE</Button>
             </div>
           </Modal>
+
         </div>}
       {this.state.onn && <Third domain={this.state.body.domain}  />}
 

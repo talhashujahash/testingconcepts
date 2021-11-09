@@ -8,15 +8,13 @@ import Navbar from "./components/navbar";
 import Contactus from "./components/Contact us";
 import queryString from 'query-string'
 import axios from "axios";
-// import { token } from './Common/Utils'
 import { Component } from "react";
 import 'antd/dist/antd.css';
 
 
 const value = queryString.parse(window.location.href);
 export const shop = value.shop
-// export const shop = "alche-app-development.myshopify.com"
-// alert(shop)
+
 
 
 
@@ -29,16 +27,6 @@ class App extends Component {
     }
   }
 
-  // componentWillMount() {
-  //   axios
-  //     .post(`${process.env.REACT_APP_BACKEND_URL}/get_token`, {
-  //       domain: shop,
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data.token)
-  //       this.setState({ token1: 'res.data.token' })
-  //     });
-  // }
   componentWillMount() {
     axios
       .get(

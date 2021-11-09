@@ -1,12 +1,10 @@
 import axios from "axios";
 import React, { Component } from "react";
 import "./Addsetting.css";
-//  import {email,pwd} from '../../Common/Utils'
-// import {token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
 import {shop} from '../../App'
 import { Link } from "react-router-dom";
-// import { Shop } from "@mui/icons-material";
+
 export default class index extends Component {
 
   constructor(props) {
@@ -25,7 +23,7 @@ export default class index extends Component {
 
     }}
     componentDidMount(){
-      if(this.state.status==='approved' && this.state.is_assets_installed===false){
+      if(this.state.status==='approved' && this.state.is_assets===false){
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/assets_api`,{
           shop:shop
         })

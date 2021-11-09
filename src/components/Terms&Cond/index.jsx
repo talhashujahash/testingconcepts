@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Terms&Cond.css";
 import { Button, Modal } from "@mui/material";
-// import { token } from '../../Common/Utils'
+
 import Third from '../Addsetting/index'
-// import { email, pwd } from '../../Common/Utils'
+
 import { shop } from '../../App'
 export default class index extends Component {
   constructor(props) {
@@ -16,15 +16,12 @@ export default class index extends Component {
       showModalPopup: false,
       accept: false,
       token:""
-
     };
   }
   isShowPopup = (status) => {
     this.setState({ showModalPopup: status });
 
   };
-
-  
   notification = () => {
     axios.post(
       `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
@@ -39,13 +36,12 @@ export default class index extends Component {
       console.log(response);
     });
   }
-
-  // /shop_details`,
+  // /shop_details,
   next = () => {
 
     axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
-      { ...this.state.body, shop: shop || 'alche-app-development.myshopify.com' },
+      { ...this.state.body, shop: shop  },
       {
         headers: {
           Authorization: process.env.REACT_APP_TOKEN,

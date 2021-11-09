@@ -1,15 +1,12 @@
 import axios from "axios";
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import TermsandCons from "../Terms&Cond";
 import Third from "../Addsetting";
 import "./ShopDetail.css";
 import { shop } from '../../App'
-// import { email, pwd } from '../../Common/Utils'
-// import { token } from '../../Common/Utils'
 import { Space, Spin } from "antd";
 import NavBar from '../navbar/index'
-//const emailValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 export default class index extends Component {
   constructor(props) {
     super();
@@ -28,10 +25,10 @@ export default class index extends Component {
       status: ''
     };
   }
-  // ${this.state.shop}
+
 
   componentWillMount() {
-    // alert(this.state.shop)
+
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
@@ -46,7 +43,7 @@ export default class index extends Component {
           is_shopify_plus: res.data.is_shopify_plus,
           collections: res.data.collections
         })
-        if (res.data.shop_details[0].status !== undefined) {
+        if (res.data.shop_details[0]?.status !== undefined) {
           this.setState({ status: res.data.shop_details[0].status })
         }
 

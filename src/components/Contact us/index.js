@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Button, Modal } from "@mui/material";
 import { Link } from "react-router-dom";
-//import { baseUrl, taken } from "../../Common/Utils";
 import "./Contactus.css";
 export default class index extends Component {
   constructor(props) {
@@ -34,7 +33,7 @@ export default class index extends Component {
       console.log(this.state);
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/get_token`, {
-          domain: this.state.shop || 'alche-app-development.myshopify.com',
+          domain: this.state.shop,
         })
         .then((res) => {
           console.log(res.data.token)
@@ -43,7 +42,7 @@ export default class index extends Component {
           axios
             .post(
               `${process.env.REACT_APP_BACKEND_URL}/contact_details`,
-              { ...this.state, shop: this.state.shop || 'alche-app-development.myshopify.com' },
+              { ...this.state, shop: this.state.shop },
               {
                 headers: {
                   Authorization: "Token " + this.state.token,

@@ -21,7 +21,9 @@ export default class index extends Component {
   isShowPopup = (status) => {
     this.setState({ showModalPopup: status });
   };
+  // checking for empty field and sending requets for Email
   next = () => {
+    // checking for empty field 
     if (
       this.state.email !== "" &&
       this.state.preference !== "" &&
@@ -31,6 +33,7 @@ export default class index extends Component {
       this.state.phone !== ""
     ) {
       console.log(this.state);
+      //      sending requets for Email
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/get_token`, {
           domain: this.state.shop,
@@ -55,6 +58,7 @@ export default class index extends Component {
         });
     }
   };
+  // preference for response  Call or Email
   onChangeRadio = (e) => {
     this.setState({ preference: e.target.value });
   };
@@ -129,7 +133,6 @@ export default class index extends Component {
                 />
                 Phone&nbsp;Call
               </h5>
-
               <h5>
                 <input
                   type="radio"

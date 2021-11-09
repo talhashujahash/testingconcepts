@@ -20,6 +20,7 @@ export default class index extends Component {
     status:'',
     is_assets:''
     }}
+
     componentDidMount(){
       if(this.state.status==='approved' && this.state.is_assets===false){
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/assets_api`,{
@@ -27,6 +28,7 @@ export default class index extends Component {
         })
       }
     }
+    // getting previously saved setting from shopify backend
     componentWillMount() {
       axios
         .get(
@@ -44,6 +46,7 @@ export default class index extends Component {
           this.setState({ loading: false })
         })
     }
+    //saving setting to both backends
     save = () => {
       console.log(this.state);
       axios
@@ -91,7 +94,6 @@ export default class index extends Component {
         <div className="Addsettinghead">
           <div className="d-flex">
             <svg
-              
               style={{ minWidth: "14px" }}
               width="20"
               height="20"

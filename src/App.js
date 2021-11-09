@@ -12,6 +12,8 @@ import { Component } from "react";
 import 'antd/dist/antd.css';
 
 
+
+// getting shop url 
 const value = queryString.parse(window.location.href);
 export const shop = value.shop
 
@@ -27,6 +29,7 @@ class App extends Component {
     }
   }
 
+  //getting status for the shop ("Approved or disapproved ") from shopify backend
   componentWillMount() {
     axios
       .get(

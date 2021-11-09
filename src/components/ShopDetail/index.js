@@ -28,7 +28,7 @@ export default class index extends Component {
 
 
   componentWillMount() {
-
+    // getting the store data (e.g: is_shopify_plus)
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
@@ -36,7 +36,6 @@ export default class index extends Component {
       )
       .then((res) => {
         console.log(res.data);
-
         this.setState({
           loading: false,
           data: res.data.shop_details,
@@ -46,35 +45,29 @@ export default class index extends Component {
         if (res.data.shop_details[0]?.status !== undefined) {
           this.setState({ status: res.data.shop_details[0].status })
         }
-
       })
 
-    axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
-      email: process.env.REACT_APP_EMAIL, password: process.env.REACT_APP_PWD
-    }).then((res) => {
-      console.log(res);
-
-
-      axios
-        .get(
-          `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
-          {
-            headers: {
-              Authorization: "Token " + res.data.token,
-            },
-          }
-        )
-        .then(function (response) {
-          console.log(response);
-
-        });
-    })
-
+    // axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
+    //   email: process.env.REACT_APP_EMAIL, password: process.env.REACT_APP_PWD
+    // }).then((res) => {
+    //   console.log(res);
+    //   axios
+    //     .get(
+    //       `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
+    //       {
+    //         headers: {
+    //           Authorization: "Token " + res.data.token,
+    //         },
+    //       }
+    //     )
+    //     .then(function (response) {
+    //       console.log(response);
+    //     });
+    // })
   }
 
   next = (body) => {
     if (
-
       this.state.shop_email !== "" &&
       this.state.shop_name !== "" &&
       this.state.shop_number !== "" &&

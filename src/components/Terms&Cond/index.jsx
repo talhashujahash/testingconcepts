@@ -20,8 +20,8 @@ export default class index extends Component {
   }
   isShowPopup = (status) => {
     this.setState({ showModalPopup: status });
-
   };
+  // function for sending shopDetails 
   notification = () => {
     axios.post(
       `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
@@ -38,7 +38,8 @@ export default class index extends Component {
   }
   // /shop_details,
   next = () => {
-
+    
+    // saving shopdetails on shopify backend
     axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
       { ...this.state.body, shop: shop  },
@@ -52,7 +53,7 @@ export default class index extends Component {
         console.log(response);
       })
 
-      
+      // saving shopdetails on admin_panel backend
       axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
       email: process.env.REACT_APP_EMAIL, password: process.env.REACT_APP_PWD
     }).then((res) => {

@@ -47,7 +47,9 @@ class App extends Component {
       )
       .then((res) => {
         console.log(res.data.shop_details[0]);
-        this.setState({ status: res.data.shop_details[0].status })
+        if (res.data.shop_details[0]?.status !== undefined) {
+          this.setState({ status: res.data.shop_details[0]?.status })
+        }
       })
   }
   render() {

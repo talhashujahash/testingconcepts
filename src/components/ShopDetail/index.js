@@ -39,12 +39,16 @@ export default class index extends Component {
       )
       .then((res) => {
         console.log(res.data);
+        if (res.data.shop_details[0].status !== undefined) {
+          this.setState({ status: res.data.shop_details[0].status })
+        }
         this.setState({
           data: res.data.shop_details,
           is_shopify_plus: res.data.is_shopify_plus,
           collections: res.data.collections,
-          status: res.data.shop_details[0]?.status,
-          loading: false
+          loading: false,
+
+
         })
 
       })

@@ -37,7 +37,6 @@ export default class index extends Component {
     )
     .then(function (response) {
       console.log(response);
-
     });
   }
 

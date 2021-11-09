@@ -35,7 +35,7 @@ export default class index extends Component {
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details?shop=${shop}`,
-        { headers: { Authorization: process.env.token } }
+        { headers: { Authorization: process.env.SYNERGIST_TOKEN } }
       )
       .then((res) => {
         console.log(res.data);
@@ -48,7 +48,7 @@ export default class index extends Component {
       })
 
     axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
-      email: process.env.email, password: process.env.pwd
+      email: process.env.SYNERGIST_EMAIL, password: process.env.SYNERGIST_PWD
     }).then((res) => {
       console.log(res);
 

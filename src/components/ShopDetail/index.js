@@ -39,11 +39,13 @@ export default class index extends Component {
       )
       .then((res) => {
         console.log(res.data);
-        this.setState({ data: res.data.shop_details })
-        this.setState({ is_shopify_plus: res.data.is_shopify_plus })
-        this.setState({ collections: res.data.collections })
-        this.setState({ status: res.data.shop_details[0].status })
-        this.setState({ loading: false })
+        this.setState({
+          data: res.data.shop_details,
+          is_shopify_plus: res.data.is_shopify_plus,
+          collections: res.data.collections,
+          status: res.data.shop_details[0]?.status,
+          loading: false
+        })
 
       })
 

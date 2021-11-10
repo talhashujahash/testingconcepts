@@ -32,14 +32,14 @@ export default class index extends Component {
       this.state.description !== "" &&
       this.state.phone !== ""
     ) {
-      console.log(this.state);
+
       //      sending requets for Email
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/get_token`, {
           domain: this.state.shop,
         })
         .then((res) => {
-          console.log(res.data.token)
+
           this.setState({ token: res.data.token })
 
           axios
@@ -53,7 +53,7 @@ export default class index extends Component {
               }
             )
             .then(function (response) {
-              console.log(response);
+
             });
         });
     }

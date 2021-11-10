@@ -35,7 +35,7 @@ export default class index extends Component {
         { headers: { Authorization: process.env.REACT_APP_TOKEN } }
       )
       .then((res) => {
-        console.log(res.data);
+
         this.setState({
           loading: false,
           data: res.data.shop_details,
@@ -50,7 +50,7 @@ export default class index extends Component {
     // axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
     //   email: process.env.REACT_APP_EMAIL, password: process.env.REACT_APP_PWD
     // }).then((res) => {
-    //   console.log(res);
+    //  
     //   axios
     //     .get(
     //       `${process.env.REACT_APP_BACKEND_URL2}/notifications/notification`,
@@ -61,7 +61,7 @@ export default class index extends Component {
     //       }
     //     )
     //     .then(function (response) {
-    //       console.log(response);
+    //    
     //     });
     // })
   }
@@ -73,9 +73,8 @@ export default class index extends Component {
       this.state.shop_number !== "" &&
       this.state.shop_url !== ""
     ) { this.setState({ step: true }) }
-    else {
-      console.log(body);
-    }
+
+
   };
   render() {
     const { step, shop_name, shop_url, shop_number, shop_email, alcoholic_check, drugs_check, is_shopify_plus, collections } = this.state;
@@ -126,7 +125,7 @@ export default class index extends Component {
                         required="true"
                         onBlur={this.validateEmailAddress}
                         onChange={(e) => {
-                          console.log([e.target.name])
+
                           this.setState({ [e.target.name]: e.target.value });
                         }}
                       ></input>
@@ -163,7 +162,7 @@ export default class index extends Component {
                     <div className="fieldstyle">
                       <label className="color_blue">
                         {" "}
-                      Do you sale any of these products
+                      Do you sell any of these products
                     </label>{" "}
                       <div>
                         <input

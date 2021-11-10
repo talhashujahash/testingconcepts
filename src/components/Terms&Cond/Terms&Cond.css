@@ -58,6 +58,15 @@
   font-size: 14px;
   font-weight: 600;
 }
+.button1 {
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid pink;
+  color: #555555;
+  margin-right: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
 .TermModalmain {
   position: absolute;
   background-color: white;

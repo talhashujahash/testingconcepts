@@ -36,7 +36,7 @@ export default class index extends Component {
           { headers: { Authorization: process.env.REACT_APP_TOKEN } }
         )
         .then((res) => {
-         console.log(res.data.shop_details[0]);
+         
           this.setState({ is_shopify_plus: res.data.is_shopify_plus })
           this.setState({ is_checkout: res.data.shop_details[0].is_checkout })
           this.setState({ is_cart: res.data.shop_details[0].is_cart })
@@ -48,11 +48,11 @@ export default class index extends Component {
     }
     //saving setting to both backends
     save = () => {
-      console.log(this.state);
+      //saving setting to shopify backends
       axios
       .put(
         `${process.env.REACT_APP_BACKEND_URL}/shop_details`,
-        { ...this.state,shop:this.state.domain , },
+        { ...this.state,shop:shop , },
         {
           headers: {
              Authorization:  process.env.REACT_APP_TOKEN,
@@ -60,11 +60,12 @@ export default class index extends Component {
         }
       )
       .then(function (response) {
-        console.log(response);
+       
+
+       //saving setting to admin_panel backends
               axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`,{
-         email:process.env.REACT_APP_EMAIL,password:process.env.REACT_APP_TOKEN
-      }).then((res)=>{
-        console.log(res);
+         email:process.env.REACT_APP_EMAIL,password:process.env.REACT_APP_PWD
+      }).then((res)=>{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
           axios
             .put(
               `${process.env.REACT_APP_BACKEND_URL2}/stores/store_setting_for_app?domain=${this.state.domain}`,
@@ -76,14 +77,14 @@ export default class index extends Component {
               }
             )
             .then(function (response) {
-              console.log(response);
+           
   
             });
           })        
          })
     };
   render() {
-    console.log(this.props.token)
+  
   
     return (
       <div>

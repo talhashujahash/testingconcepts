@@ -11,14 +11,9 @@ import axios from "axios";
 import { Component } from "react";
 import 'antd/dist/antd.css';
 
-
-
 // getting shop url 
 const value = queryString.parse(window.location.href);
 export const shop = value.shop
-
-
-
 
 
 class App extends Component {
@@ -37,7 +32,7 @@ class App extends Component {
         { headers: { Authorization: process.env.REACT_APP_TOKEN } }
       )
       .then((res) => {
-        console.log(res.data.shop_details[0]);
+
         if (res.data.shop_details[0]?.status !== undefined) {
           this.setState({ status: res.data.shop_details[0]?.status })
         }
@@ -54,7 +49,7 @@ class App extends Component {
             </Route>
             <Route path="/termscond">
               <Navbar status={this.state.status} />
-              <Term shop={shop} on={false} />
+              <Terms shop={shop} on={false} />
             </Route>
             <Route path="/setting">
               <Navbar status={this.state.status} />

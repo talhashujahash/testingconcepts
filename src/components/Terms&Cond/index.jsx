@@ -33,7 +33,7 @@ export default class index extends Component {
       }
     )
     .then(function (response) {
-      console.log(response);
+      
     });
   }
   // /shop_details,
@@ -50,14 +50,14 @@ export default class index extends Component {
       }
     )
       .then(function (response) {
-        console.log(response);
+       
       })
 
       // saving shopdetails on admin_panel backend
       axios.post(`${process.env.REACT_APP_BACKEND_URL2}/users/login`, {
       email: process.env.REACT_APP_EMAIL, password: process.env.REACT_APP_PWD
     }).then((res) => {
-      console.log(res);
+     
           this.setState({
             token:res.data.token
           })
@@ -122,7 +122,7 @@ render() {
             </div>
             {this.state.on && (
               <div>
-                {console.log(Boolean(this.props.on))}
+              
                 <button className="button1">Not right now</button>
                 <button
                   className="button2"
@@ -150,7 +150,6 @@ render() {
               <p>Wait until our CSR reaches you out to provide assistance</p>
               <Button onClick={() => {
                 this.isShowPopup(false)
-
                 this.setState({ onn: true })
               }}>DONE</Button>
             </div>
